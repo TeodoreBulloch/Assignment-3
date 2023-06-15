@@ -59,3 +59,95 @@ void Time::setTime(unsigned int hour, unsigned int minute, unsigned int second){
 /*                                           */
 /* YOU MAY ADD YOUR MODIFICATIONS HERE       */
 /*                                           */
+
+Time& Time::operator+=(const Time& other)
+{
+    unsigned int totalSeconds = getnSeconds() + other.getnSeconds();
+    setTime(totalSeconds);
+    return *this;
+}
+
+Time Time::operator+(const Time& other) const
+{
+    Time result = *this;
+    result += other;
+    return result;
+}
+
+Time& Time::operator-=(const Time& other)
+{
+    int diffSeconds = static_cast<int>(getnSeconds()) - static_cast<int>(other.getnSeconds());
+    if (diffSeconds < 0)
+        diffSeconds += SECS_PER_DAY;
+    setTime(diffSeconds);
+    return *this;
+}
+
+Time Time::operator-(const Time& other) const
+{
+    Time result = *this;
+    result -= other;
+    return result;
+}
+
+bool Time::operator==(const Time& other) const
+{
+    return getnSeconds() == other.getnSeconds();
+}
+
+bool Time::operator!=(const Time& other) const
+{
+    return !(*this == other);
+}
+
+bool Time::operator>(const Time& other) const
+{
+    return getnSeconds() > other.getnSeconds();
+}
+
+bool Time::operator<(const Time& other) const
+{
+    return getnSeconds() < other.getnSeconds();
+}
+
+bool Time::operator>=(const Time& other) const
+{
+    return getnSeconds() >= other.getnSeconds();
+}
+
+bool Time::operator<=(const Time& other) const
+{
+    return getnSeconds() <= other.getnSeconds();
+}
+
+unsigned int& Time::operator[](const std::string& channel)
+{
+    if (channel == "hour")
+        return hour;
+    else if (channel == "minute")
+        return minute;
+    else if (channel == "second")
+        return second;
+    else
+        throw std::invalid_argument("Invalid channel");
+}
+
+const unsigned int& Time::operator[](const std::string& channel) const
+{
+    if (channel == "hour")
+        return hour;
+    else if (channel == "minute")
+        return minute;
+    else if (channel == "second")
+        return second;
+    else
+        throw std::invalid_argument("Invalid channel");
+}
+
+std::ostream& operator<<(std::ostream& os, const Time& time)
+{
+    os << std::setfill('0') << std::setw(2) << time.hour << ":"
+       << std::setfill('0') << std::setw(2) << time.minute << ":"
+       << std::setfill('0') << std::setw(2) << time.second;
+    return os;
+}

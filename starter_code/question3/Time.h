@@ -55,6 +55,66 @@ public:
     /*                                           */
     /* YOU MAY ADD YOUR MODIFICATIONS HERE       */
     /*                                           */
+     Time& operator+=(const Time& other);
+    // Preconditions: None
+    // Postconditions: The current Time object is updated by adding the given Time object
+    // Returns: A reference to the current Time object
+
+    Time operator+(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: The current Time object and the given Time object are added, and a new Time object is returned
+
+    Time& operator-=(const Time& other);
+    // Preconditions: None
+    // Postconditions: The current Time object is updated by subtracting the given Time object
+    // Returns: A reference to the current Time object
+
+    Time operator-(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: The given Time object is subtracted from the current Time object, and a new Time object is returned
+
+    bool operator==(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is equal to the given Time object; false otherwise
+
+    bool operator!=(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is not equal to the given Time object; false otherwise
+
+    bool operator>(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is greater than the given Time object; false otherwise
+
+    bool operator<(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is less than the given Time object; false otherwise
+
+    bool operator>=(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is greater than or equal to the given Time object; false otherwise
+
+    bool operator<=(const Time& other) const;
+    // Preconditions: None
+    // Postconditions: None
+    // Returns: True if the current Time object is less than or equal to the given Time object; false otherwise
+
+    unsigned int& operator[](const std::string& channel);
+    // Preconditions: channel must be a valid channel ("hour", "minute", or "second")
+    // Postconditions: None
+    // Returns: A reference to the corresponding channel value of the Time object
+
+    const unsigned int& operator[](const std::string& channel) const;
+    // Preconditions: channel must be a valid channel ("hour", "minute", or "second")
+    // Postconditions: None
+    // Returns: A const reference to the corresponding channel value of the Time object
+
+    friend std::ostream& operator<<(std::ostream& os, const Time& time);
+    
     
 private:
     /*                                           */
